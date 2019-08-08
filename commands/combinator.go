@@ -1,8 +1,8 @@
 package commands
 
 import (
-	"code.google.com/p/gelo"
-	"code.google.com/p/gelo/extensions"
+	"github.com/Esgorhannoth/gelo"
+	"github.com/Esgorhannoth/gelo/extensions"
 )
 
 func Compose(vm *gelo.VM, args *gelo.List, ac uint) gelo.Word {

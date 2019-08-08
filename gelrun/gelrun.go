@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
-	"code.google.com/p/gelo"
-	"code.google.com/p/gelo/commands"
-	"code.google.com/p/gelo/extensions"
+	"github.com/Esgorhannoth/gelo"
+	"github.com/Esgorhannoth/gelo/commands"
+	"github.com/Esgorhannoth/gelo/extensions"
 	"io"
 	"log"
 	"os"

@@ -1,6 +1,6 @@
 package commands
 
-import "code.google.com/p/gelo"
+import "github.com/Esgorhannoth/gelo"
 
 func And(vm *gelo.VM, args *gelo.List, ac uint) (ret gelo.Word) {
 	switch ac {

@@ -3,7 +3,7 @@ package extensions
 import (
 	"bufio"
 	"bytes"
-	"code.google.com/p/gelo"
+	"github.com/Esgorhannoth/gelo"
 	"os"
 )
 

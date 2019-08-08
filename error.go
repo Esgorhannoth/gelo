@@ -52,7 +52,7 @@ If you are reading this, you have discovered a bug in Gelo, a  and not the
 program that you are using.
 Please see if this has been reported at:
 
-	http://code.google.com/p/gelo/issues/list
+	http://github.com/Esgorhannoth/gelo/issues/list
 
 and if not report the error there, so that we may fix it, before notifying the
 owners of the application that you are using of the error.

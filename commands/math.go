@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"code.google.com/p/gelo"
+	"github.com/Esgorhannoth/gelo"
 	"math"
 )
 

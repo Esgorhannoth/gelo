@@ -2,7 +2,7 @@ package commands
 
 import (
 	"bytes"
-	"code.google.com/p/gelo"
+	"github.com/Esgorhannoth/gelo"
 )
 
 func Type_of(vm *gelo.VM, args *gelo.List, ac uint) gelo.Word {

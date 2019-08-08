@@ -2,7 +2,7 @@ package extensions
 
 import (
 	"bytes"
-	"code.google.com/p/gelo"
+	"github.com/Esgorhannoth/gelo"
 )
 
 //BUG(jmf): would not behave well if ith Port is Closed()
