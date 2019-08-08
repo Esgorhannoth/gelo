@@ -125,6 +125,7 @@ func rewind(vm *gelo.VM, args *gelo.List, ac uint) gelo.Word {
 		if len(history) > 0 {
 			history = history[:len(history)-1]
 		}
+		return gelo.Null
 	}
 	n := _valid_idx(vm, "rewind", args.Value)
 	if n == 0 {
@@ -226,6 +227,7 @@ func _make_slice(vm *gelo.VM, name string, args *gelo.List) (i, j int) {
 }
 
 func replay(vm *gelo.VM, args *gelo.List, ac uint) gelo.Word {
+	// TODO crashes
 	if ac > 1 {
 		return metahelp("replay")
 	}
@@ -345,6 +347,10 @@ func init() {
 		"exit\n\tExit the interpreter",
 		exit,
 	}
+	dollar_map["quit"] = command{
+		"exit\n\tExit the interpreter",
+		exit,
+	}
 	dollar_map["help"] = command{
 		"help command?\n\tDisplays help for an interpreter command. Enter \"$$ list\" to list commands",
 		help,
@@ -357,12 +363,16 @@ func init() {
 		"history\n\tDisplay a brief, numbered history of all commands entered",
 		show_history,
 	}
+	dollar_map["hist"] = command{
+		"history\n\tDisplay a brief, numbered history of all commands entered",
+		show_history,
+	}
 	dollar_map["search"] = command{
 		"search regex\n\tSearch history against regex and display brief, numbered history of all matches.",
 		search,
 	}
 	dollar_map["clear"] = command{
-		"clear\n\tClear history (leaves namespace in tact)",
+		"clear\n\tClear history (leaves namespace intact)",
 		clear,
 	}
 	dollar_map["rewind"] = command{
