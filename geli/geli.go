@@ -253,7 +253,7 @@ func cut(vm *gelo.VM, args *gelo.List, _ uint) gelo.Word {
 
 func see(vm *gelo.VM, args *gelo.List, _ uint) gelo.Word {
 	i, j := _make_slice(vm, "see", args)
-	for line := range history[i:j] {
+	for _, line := range history[i:j] {
 		fmt.Print(line)
 	}
 	return gelo.Null
