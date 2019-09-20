@@ -29,6 +29,12 @@ func NewLiterateReader(src io.Reader) *LiterateReader {
 }
 
 func (lr *LiterateReader) Read(p []byte) (n int, err error) {
+	/// debug
+	fmt.Println("\n-- START of call:")
+	fmt.Println("lr.scratch: ", lr.scratch)
+	fmt.Println("---")
+	fmt.Println("p: ", p)
+	fmt.Println("===")
 	//input has been exhausted
 	if lr.scratch == nil {
 		return 0, lr.err
@@ -57,17 +63,21 @@ outer:
 		}
 		//push out what we can from scratch
 		for _, c := range lr.scratch[lr.start:] {
-			if n == len(p)-1 {
+			///if n == len(p)-1 {
+			if n == len(p) {
 				//filled p
 				break outer
 			}
 			lr.start++
 			//last was nl, select mode
+			///fmt.Printf(":%c", c)
 			if lr.nl {
-				lr.code, lr.nl = c == '>', false
+				lr.code, lr.nl = c == '>', c == '\n'
+				///fmt.Println("nl met, code flag set is ", lr.code)
 			} else {
 				if lr.code {
 					//write
+					///fmt.Printf("|%c", c)
 					p[n] = c
 					n++
 				}
@@ -76,6 +86,13 @@ outer:
 		}
 	}
 
+	fmt.Println("\n-- END of call:")
+	fmt.Println("lr.scratch: ", lr.scratch)
+	fmt.Println("---")
+	fmt.Println("p: ", p)
+	fmt.Println("===")
+	p = p[:n] // NEW
+	fmt.Println("len p and n: ", len(p), n)
 	return n, lr.err
 }
 
@@ -124,12 +141,30 @@ func main() {
 
 	if *lit || file_name[len(file_name)-3:] == "lit" {
 		reader = NewLiterateReader(reader)
+	}
+	/*
+	// This `test` dries the input file, that's why
+	// it is not executed
+	if *lit || file_name[len(file_name)-3:] == "lit" {
+		reader = NewLiterateReader(reader)
 		t := make([]byte, 64)
 		for {
+			fmt.Println("\n-- Calling Lit.Read --")
 			n, err := reader.Read(t)
-			fmt.Println(string(t), "n:", n, "err", err == nil)
+			if n == 0 && err == io.EOF{
+				fmt.Println("first break")
+				break
+			}
+			fmt.Println(">>>"+ string(t[:n])+ "<<<")
+			fmt.Println("\nn:", n, "err == nil", err == nil, err)
+			if err == io.EOF {
+				// echoed the last bit, now exit
+				fmt.Println("second break")
+				break
+			}
 		}
 	}
+	*/
 
 	tracer := extensions.Stderr
 
