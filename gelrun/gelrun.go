@@ -57,7 +57,6 @@ outer:
 		}
 		//push out what we can from scratch
 		for _, c := range lr.scratch[lr.start:] {
-			///if n == len(p)-1 {
 			if n == len(p) {
 				//filled p
 				break outer
@@ -65,6 +64,8 @@ outer:
 			lr.start++
 			//last was nl, select mode
 			if lr.nl {
+				// lr.nl should be `c == '\n'` instead of just false
+				// or two newlines will break next line with code
 				lr.code, lr.nl = c == '>', c == '\n'
 			} else {
 				if lr.code {
@@ -127,30 +128,8 @@ func main() {
 	if *lit || file_name[len(file_name)-3:] == "lit" {
 		reader = NewLiterateReader(reader)
 	}
-	/*
-	// This `test` dries the input file, that's why
-	// it is not executed
-	//
-	if *lit || file_name[len(file_name)-3:] == "lit" {
-		reader = NewLiterateReader(reader)
-		t := make([]byte, 64)
-		for {
-			fmt.Println("\n-- Calling Lit.Read --")
-			n, err := reader.Read(t)
-			if n == 0 && err == io.EOF{
-				fmt.Println("first break")
-				break
-			}
-			fmt.Println(">>>"+ string(t[:n])+ "<<<")
-			fmt.Println("\nn:", n, "err == nil", err == nil, err)
-			if err == io.EOF {
-				// echoed the last bit, now exit
-				fmt.Println("second break")
-				break
-			}
-		}
-	}
-	*/
+	// The `test` that was here dried the input file, that's why
+	// it was not executed
 
 	tracer := extensions.Stderr
 
